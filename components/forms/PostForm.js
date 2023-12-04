@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 // import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { CameraOutLined, LoadingOutlined } from "@ant-design/icons";
+import { CameraOutlined, LoadingOutlined } from "@ant-design/icons";
 
 
 const PostForm = ({
@@ -37,7 +37,7 @@ const PostForm = ({
           ) : uploading ? (
             <LoadingOutlined className="mt-2" />
           ) : (
-            <CameraOutLined className="mt-2" />
+            <CameraOutlined className="mt-2" />
           )}
           <input onChange={handleImage} type="file" accept="images/*" hidden />
         </label>

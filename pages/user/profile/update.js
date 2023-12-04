@@ -6,7 +6,7 @@ import Link from "next/link";
 import { UserContext } from "../../../context";
 import { useRouter } from "next/router";
 import AuthForm from "../../../components/forms/AuthForm";
-import { CameraOutLined, LoadingOutlined } from "@ant-design/icons";
+import { CameraOutlined, LoadingOutlined } from "@ant-design/icons";
 
 const ProfileUpdate = () => {
   const [username, setUsername] = useState("");
@@ -102,7 +102,7 @@ const ProfileUpdate = () => {
           ) : uploading ? (
             <LoadingOutlined className="mt-2" />
           ) : (
-            <CameraOutLined className="mt-2" />
+            <CameraOutlined className="mt-2" />
           )}
           <input onChange={handleImage} type="file" accept="images/*" hidden />
         </label>

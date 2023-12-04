@@ -1,8 +1,8 @@
 import { useState, useContext } from "react";
 import { UserContext } from "../context";
 import axios from "axios";
-import People from "./cards/people";
 import { toast } from "react-toastify";
+import People from "./cards/People";
 
 const Search = () => {
   const { state, setState } = useContext(UserContext);
@@ -64,6 +64,7 @@ const Search = () => {
 
   return (
     <>
+    
       <form className="form-inline row" onSubmit={searchUser}>
         <div className="col-8">
           <input
