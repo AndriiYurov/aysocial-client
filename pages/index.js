@@ -56,8 +56,8 @@ const Home = ({ posts }) => {
           content="http://aysocial.com/images/default.jpg"
         />
       </Head>
-      <ParallaxBG url="/images/default.jpg" />
-      <div className="container">
+      <ParallaxBG url="/images/default.jpg">AY Social</ParallaxBG>
+      <div className="container-fluid">
         {/* <button
           onClick={() => {
             socket.emit("send-message", "This is rayan!!!");
@@ -66,9 +66,10 @@ const Home = ({ posts }) => {
           Send message
         </button> */}
 
-        <div className="row pt-5">
+        <div className="row pt-3 d-flex justify-content-center sc">
+        
           {collection.map((post) => (
-            <div key={post._id} className="col-md-4">
+            <div key={post._id} className="col-md-7">
               <Link className="nav-link" href={`/post/view/${post._id}`}>
                 <PostPublic post={post} />
               </Link>
@@ -79,6 +80,7 @@ const Home = ({ posts }) => {
 
             //     </div>
           ))}
+          
         </div>
       </div>
     </>

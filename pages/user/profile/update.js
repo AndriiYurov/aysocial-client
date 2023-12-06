@@ -7,6 +7,8 @@ import { UserContext } from "../../../context";
 import { useRouter } from "next/router";
 import AuthForm from "../../../components/forms/AuthForm";
 import { CameraOutlined, LoadingOutlined } from "@ant-design/icons";
+import UserRoute from "../../../components/routes/UserRoute";
+import ParallaxBG from "../../../components/cards/ParallaxBG";
 
 const ProfileUpdate = () => {
   const [username, setUsername] = useState("");
@@ -86,12 +88,14 @@ const ProfileUpdate = () => {
 
 
   return (
+    <UserRoute>
+      <ParallaxBG url="/images/default.jpg">Profile</ParallaxBG>
     <div className="container-fluid">
-      <div className="row py-5 text-light bg-default-image">
+      {/* <div className="row py-5 text-light bg-default-image">
         <div className="col text-center">
           <h1>Profile</h1>
         </div>
-      </div>
+      </div> */}
 
       <div className="row py-5">
         <div className="col-md-6 offset-md-3">
@@ -109,6 +113,7 @@ const ProfileUpdate = () => {
 
 
           <AuthForm
+          state={state}
             profileUpdate={true}
             username={username}
             setUsername={setUsername}
@@ -148,6 +153,7 @@ const ProfileUpdate = () => {
         </div>
       </div>
     </div>
+    </UserRoute>
   );
 };
 

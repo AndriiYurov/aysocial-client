@@ -10,8 +10,12 @@ const UserRoute = ({ children }) => {
   const { state } = useContext(UserContext);
 
   useEffect(() => {
-    state && state.token && getCurrentUser();
-  }, [state && state.token]);
+    if ((state && state.token) || (state && state.google_token)) {
+      getCurrentUser();
+    }
+    // state && state.token && getCurrentUser();
+    // state && state.google_token && getCurrentUser();
+  }, [state && state.token, state && state.google_token]);
 
   const getCurrentUser = async () => {
     try {

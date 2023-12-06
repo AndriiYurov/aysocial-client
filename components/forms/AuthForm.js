@@ -1,6 +1,7 @@
 import { SyncOutlined } from "@ant-design/icons";
 
 const AuthForm = ({
+  state,
   handleSubmit,
   name,
   setName,
@@ -88,6 +89,7 @@ const AuthForm = ({
         type="password"
         className="form-control"
         placeholder="Enter password"
+        disabled={state && state.google_token}
       />
     </div>
 
@@ -97,7 +99,10 @@ const AuthForm = ({
           <small>
             <label className="text-muted">Pick a question</label>
           </small>
-          <select className="form-control">
+          <select
+            disabled={state && state.google_token}
+            className="form-control"
+          >
             <option>What is your favorite color?</option>
             <option>What is your best friend's name?</option>
             <option>What city you was born?</option>
@@ -114,6 +119,7 @@ const AuthForm = ({
             type="text"
             className="form-control"
             placeholder="Write your answer here"
+            disabled={state && state.google_token}
           />
         </div>
       </>
@@ -128,7 +134,7 @@ const AuthForm = ({
             ? !name || !email || !password || !secret || loading
             : !email || !password || loading
         }
-        className="btn btn-primary col-12"
+        className="btn btn-secondary col-12"
       >
         {loading ? <SyncOutlined spin className="py-1" /> : "Submit"}
       </button>

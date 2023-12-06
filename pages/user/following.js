@@ -15,10 +15,10 @@ const Following = () => {
   const router = useRouter();
 
   useEffect(() => {
-    if (state && state.token) {
+    if (state && state.token || state && state.google_token) {
       fetchFollowing();
     }
-  }, [state && state.token]);
+  }, [state && state.token, state && state.google_token]);
 
   const fetchFollowing = async () => {
     try {

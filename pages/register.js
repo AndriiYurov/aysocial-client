@@ -7,6 +7,7 @@ import { UserContext } from "../context";
 import { useRouter } from "next/router";
 
 import AuthForm from "../components/forms/AuthForm";
+import ParallaxBG from "../components/cards/ParallaxBG";
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -44,12 +45,16 @@ const Register = () => {
   if (state && state.token) router.push("/");
 
   return (
+    <>
+    <ParallaxBG url="/images/default.jpg">
+            Register
+      </ParallaxBG>
     <div className="container-fluid">
-      <div className="row py-5 text-light bg-default-image">
+      {/* <div className="row py-5 text-light bg-default-image">
         <div className="col text-center">
           <h1>Register</h1>
         </div>
-      </div>
+      </div> */}
 
       <div className="row py-5">
         <div className="col-md-6 offset-md-3">
@@ -91,6 +96,7 @@ const Register = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

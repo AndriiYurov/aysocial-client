@@ -1,6 +1,5 @@
 import { SyncOutlined } from "@ant-design/icons";
 
-
 const ForgotPasswordForm = ({
   handleSubmit,
 

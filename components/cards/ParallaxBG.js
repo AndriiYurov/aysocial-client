@@ -1,4 +1,4 @@
-const ParallaxBG = ({ url, children = "AY Social" }) => {
+const ParallaxBG = ({ url, children }) => {
   return (
     <div
       className="container-fluid"
@@ -7,12 +7,16 @@ const ParallaxBG = ({ url, children = "AY Social" }) => {
         backgroundAttachment: "fixed",
         padding: "100px 0px 75px 0px",
         backgroundRepeat: "no-repeat",
-        backgroundSize: "cover",
+        backgroundSize: "auto",
         backgroundPosition: "center center",
         display: "block",
+        height: "auto",
+        margin: "-70px 0 0 0",
       }}
     >
-      <h1 className="display-1 font-weight-bold text-center">{children}</h1>
+      <h1 className="display-1 font-weight-bold text-center bg-text">
+        {children}
+      </h1>
     </div>
   );
 };

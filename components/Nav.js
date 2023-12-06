@@ -16,15 +16,20 @@ const Nav = () => {
   const router = useRouter();
 
   const logout = () => {
+    
     window.localStorage.removeItem("auth");
     setState(null);
-    router.push("/login");
+    setTimeout(() => {
+      router.push("/login");
+    }, 1000);
+    
+    
   };
   return (
-    <nav className="nav bg-primary d-flex justify-content-between">
+    <nav className="nav d-flex bg-dark justify-content-between" style={{opacity: "0.5", margin: "10px", borderRadius: "10px"}}>
       <div className={`${current === "/" && "active"}`}>
-        <Link href="/" className="nav-link text-light hover">
-          <Avatar className="logo" size={60} src="/images/logo.png"/>
+        <Link href="/" className=" text-light hover">
+          <Avatar className="logo" size={80} src="/images/logo.png"/>
         </Link>
       </div>
 

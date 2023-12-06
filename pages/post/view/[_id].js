@@ -1,15 +1,11 @@
-
-
 import ParallaxBG from "../../../components/cards/ParallaxBG";
 import axios from "axios";
 import Head from "next/head";
-import Link from "next/link";
 import PostPublic from "../../../components/cards/PostPublic";
 
 import { useRouter } from "next/router";
 
 const SinglePost = ({ post }) => {
-  
   const router = useRouter();
 
   const imageSource = (post) => {
@@ -24,21 +20,18 @@ const SinglePost = ({ post }) => {
     <>
       <Head>
         <title>AY Social - A social network</title>
-        <meta
-          name="description"
-          content={post.content}
-        />
+        <meta name="description" content={post.content} />
         <meta
           property="og:description"
           content="A social network by Andrii Yurov dev"
         />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="AY Social" />
-        <meta property="og:url" content={`http://aysocial.com/post/view/${post._id}`} />
         <meta
-          property="og:image:secure_url"
-          content={imageSource(post)}
+          property="og:url"
+          content={`http://aysocial.com/post/view/${post._id}`}
         />
+        <meta property="og:image:secure_url" content={imageSource(post)} />
       </Head>
       <ParallaxBG url="/images/default.jpg" />
       <div className="container">

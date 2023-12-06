@@ -78,7 +78,7 @@ const Search = () => {
           />
         </div>
         <div className="col-4">
-          <button className="btn btn-outline-primary col-12" type="submit">
+          <button className="btn btn-outline-secondary col-12" type="submit">
             Search
           </button>
         </div>

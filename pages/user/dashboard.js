@@ -12,6 +12,7 @@ import { Modal, Pagination } from "antd";
 import CommentForm from "../../components/forms/CommentForm";
 import Search from "../../components/Search";
 import io from "socket.io-client";
+import ParallaxBG from "../../components/cards/ParallaxBG";
 
 const socket = io(
   process.env.NEXT_PUBLIC_SOCKETIO,
@@ -39,11 +40,13 @@ const Home = () => {
   const router = useRouter();
 
   useEffect(() => {
-    if (state && state.token) {
+    if (state && state.token || state && state.google_token) {
       newsFeed();
       findPeople();
     }
-  }, [state && state.token, page]);
+  }, [state && state.token, state && state.google_token, page]);
+
+
 
   useEffect(() => {
     try {
@@ -206,12 +209,16 @@ const Home = () => {
 
   return (
     <UserRoute>
+      
+      <ParallaxBG url="/images/default.jpg">
+            News feed
+      </ParallaxBG>
       <div className="container-fluid">
-        <div className="row py-5 text-light bg-default-image">
+        {/* <div className="row py-5 text-light bg-default-image">
           <div className="col text-center">
             <h1>News feed</h1>
           </div>
-        </div>
+        </div> */}
         <div className="row py-3">
           <div className="col-md-8">
             <PostForm

@@ -3,32 +3,15 @@ import renderHTML from "react-render-html";
 import moment from "moment";
 import { Avatar } from "antd";
 import PostImage from "../images/PostImage";
-import {
-  HeartOutlined,
-  HeartFilled,
-  CommentOutlined,
-  EditOutlined,
-  DeleteOutlined,
-} from "@ant-design/icons";
+import { HeartOutlined, HeartFilled, CommentOutlined } from "@ant-design/icons";
 import { UserContext } from "../../context";
-import { useRouter } from "next/router";
 import { imageSource } from "../../functions";
-import Link from "next/link";
 
-const PostPublic = ({
-  post,
-  handleDelete,
-  handleLike,
-  handleUnlike,
-  handleComment,
-  commentsCount = 3,
-  removeComment,
-}) => {
+const PostPublic = ({ post, commentsCount = 3 }) => {
   const { state } = useContext(UserContext);
-  const router = useRouter();
 
   return (
-    <>
+    <div>
       {post && post.postedBy && (
         <div key={post._id} className="card mb-5">
           <div className="card-header">
@@ -57,9 +40,7 @@ const PostPublic = ({
                 {post.likes.length} likes
               </div>
               <CommentOutlined className="text-danger pt-2 h5 px-1" />
-              <div className="pt-2 pl-3">
-              {post.comments.length} comments
-              </div>
+              <div className="pt-2 pl-3">{post.comments.length} comments</div>
             </div>
           </div>
           {/* 2 comments */}
@@ -86,7 +67,6 @@ const PostPublic = ({
                   </div>
                   <span className="badge rounded-pill text-muted">
                     {moment(c.created).fromNow()}
-                  
                   </span>
                 </li>
               ))}
@@ -94,7 +74,7 @@ const PostPublic = ({
           )}
         </div>
       )}
-    </>
+    </div>
   );
 };
 

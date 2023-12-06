@@ -5,7 +5,6 @@ const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import "react-quill/dist/quill.snow.css";
 import { CameraOutlined, LoadingOutlined } from "@ant-design/icons";
 
-
 const PostForm = ({
   content,
   setContent,
@@ -28,7 +27,7 @@ const PostForm = ({
         </form>
       </div>
       <div className="card-footer d-flex justify-content-between text-muted">
-        <button onClick={postSubmit} className="btn btn-primary btn-sm mt-1">
+        <button onClick={postSubmit} className="btn btn-secondary btn-sm mt-1">
           Post
         </button>
         <label>

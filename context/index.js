@@ -16,7 +16,7 @@ const UserProvider = ({ children }) => {
 
   const router = useRouter();
 
-  const token = state && state.token ? state.token : "";
+  const token = state && state.token ? state.token : state && state.google_token ? state.google_token : "";
   axios.defaults.baseURL = process.env.NEXT_PUBLIC_API;
   axios.defaults.headers.common["Authorization"] = `${token}`;
 
