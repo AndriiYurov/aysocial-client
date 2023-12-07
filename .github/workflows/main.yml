@@ -55,5 +55,5 @@ jobs:
               npm run build --force &&
               touch .env.local &&
               echo "${{ secrets.PROD_ENV_FILE }}" > .env.local &&
-              pm2 start npm -- start --update-env
+              pm2 restart npm -- start --update-env
               '
