@@ -24,6 +24,7 @@ jobs:
         cache: 'npm'
     - run: npm ci --force
     - run: npm run build --force
+      working-directory: build
     
     - name: rsync deployments
       uses: burnett01/rsync-deployments@5.1
