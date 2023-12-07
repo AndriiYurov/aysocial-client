@@ -23,13 +23,15 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm ci --force
+      working-directory: ./build
     - run: npm run build --force
+      working-directory: ./build
           
     - name: rsync deployments
       uses: burnett01/rsync-deployments@5.1
       with:
           switches: -avzr --delete
-          path: aysocial-client/
+          path: ./build
           remote_path: client/
           remote_host: ec2-18-223-39-160.us-east-2.compute.amazonaws.com
           remote_user: ubuntu
