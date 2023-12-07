@@ -40,13 +40,11 @@ const Home = () => {
   const router = useRouter();
 
   useEffect(() => {
-    if (state && state.token || state && state.google_token) {
+    if ((state && state.token) || (state && state.google_token)) {
       newsFeed();
       findPeople();
     }
   }, [state && state.token, state && state.google_token, page]);
-
-
 
   useEffect(() => {
     try {
@@ -54,6 +52,7 @@ const Home = () => {
     } catch (err) {
       console.log(err);
     }
+    window.scrollTo(0, 0);
   }, []);
 
   const newsFeed = async () => {
@@ -207,12 +206,14 @@ const Home = () => {
     }
   };
 
+  const handlePaginationChange = (value) => {
+    setPage(value);
+    window.scrollTo(0, 0);
+  };
+
   return (
     <UserRoute>
-      
-      <ParallaxBG url="/images/default.jpg">
-            News feed
-      </ParallaxBG>
+      <ParallaxBG url="/images/default.jpg">News feed</ParallaxBG>
       <div className="container-fluid">
         {/* <div className="row py-5 text-light bg-default-image">
           <div className="col text-center">
@@ -240,8 +241,9 @@ const Home = () => {
             />
             <Pagination
               current={page}
-              total={(totalPosts / 3) * 10}
-              onChange={(value) => setPage(value)}
+              total={(totalPosts / 10) * 10}
+              // onChange={(value) => setPage(value)}
+              onChange={handlePaginationChange}
               className="pb-5"
             />
           </div>

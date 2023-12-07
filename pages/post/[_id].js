@@ -6,11 +6,26 @@ import { toast } from "react-toastify";
 import Post from "../../components/cards/Post";
 import Link from "next/link";
 import { RollbackOutlined } from "@ant-design/icons";
+import ParallaxBG from "../../components/cards/ParallaxBG";
+import CommentForm from "../../components/forms/CommentForm";
+import { Modal } from "antd";
 
 const PostComments = () => {
   const [post, setPost] = useState({});
   const router = useRouter();
   const _id = router.query._id;
+
+  const [content, setContent] = useState("");
+  const [image, setImage] = useState({});
+  const [uploading, setUploading] = useState(false);
+  const [posts, setPosts] = useState([]);
+  const [people, setPeople] = useState([]);
+  const [comment, setComment] = useState("");
+  const [visible, setVisible] = useState(false);
+  const [currentPost, setCurrentPost] = useState({});
+  //pagination
+  const [totalPosts, setTotalPosts] = useState(0);
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     if (_id) fetchPost();
@@ -21,6 +36,60 @@ const PostComments = () => {
       const { data } = await axios.get(`/user-post/${_id}`);
 
       setPost(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const newsFeed = async () => {
+    try {
+      const { data } = await axios.get(`/news-feed/${page}`);
+      setPosts(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleLike = async (_id) => {
+    // console.log("like this post => ", _id);
+    try {
+      const { data } = await axios.put("/like-post", { _id });
+      // console.log("liked", data);
+      fetchPost();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleUnlike = async (_id) => {
+    // console.log("unlike this post => ", _id);
+    try {
+      const { data } = await axios.put("/unlike-post", { _id });
+      // console.log("unliked", data);
+      fetchPost();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleComment = (post) => {
+    setCurrentPost(post);
+    setVisible(true);
+  };
+
+  const addComment = async (e) => {
+    e.preventDefault();
+    // console.log("add comment to this post id", currentPost)._id;
+    // console.log("save comment to db", comment);
+    try {
+      const { data } = await axios.put("/add-comment", {
+        postId: currentPost._id,
+        comment,
+      });
+      console.log("add coment", data);
+      setComment("");
+      setVisible(false);
+      fetchPost();
     } catch (err) {
       console.log(err);
     }
@@ -43,22 +112,40 @@ const PostComments = () => {
   };
 
   return (
-    <div className="container-fluid">
-      <div className="row py-5 text-light bg-default-image">
-        <div className="col text-center">
-          <h1>Comments</h1>
+    <>
+      <ParallaxBG url="/images/default.jpg">Comments</ParallaxBG>
+      <div className="container-fluid">
+        <div className="container col-md-8 offset-md-2 pt-5">
+          <Post
+            post={post}
+            commentsCount={100}
+            removeComment={removeComment}
+            handleLike={handleLike}
+            handleUnlike={handleUnlike}
+            handleComment={handleComment}
+            addComment={addComment}
+          />
         </div>
+        <Link
+          className="d-flex justify-content-center p-5"
+          href="/user/dashboard"
+        >
+          <RollbackOutlined />
+        </Link>
       </div>
-      <div className="container col-md-8 offset-md-2 pt-5">
-        <Post post={post} commentsCount={100} removeComment={removeComment} />
-      </div>
-      <Link
-        className="d-flex justify-content-center p-5"
-        href="/user/dashboard"
-      >
-        <RollbackOutlined />
-      </Link>
-    </div>
+      <Modal
+          open={visible}
+          onCancel={() => setVisible(false)}
+          title="Comment"
+          footer={null}
+        >
+          <CommentForm
+            comment={comment}
+            setComment={setComment}
+            addComment={addComment}
+          />
+        </Modal>
+    </>
   );
 };
 

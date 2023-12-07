@@ -9,7 +9,7 @@ const PostList = ({
   removeComment,
 }) => {
   return (
-    <div className="sc">
+    <div>
       {posts &&
         posts.map((post) => (
           <Post

@@ -93,7 +93,7 @@ const Post = ({
           {post.comments && post.comments.length > 0 && (
             <ol
               className="list-group"
-              style={{ maxHeight: "125px", overflow: "hidden" }}
+              style={{ maxHeight: "125px", overflow: "scroll" }}
             >
               {post.comments.slice(0, commentsCount).map((c) => (
                 <li
