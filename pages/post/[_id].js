@@ -113,7 +113,7 @@ const PostComments = () => {
 
   return (
     <>
-      <ParallaxBG url="/images/default.jpg">Comments</ParallaxBG>
+      <ParallaxBG url="/images/default.jpg">COMMENTS</ParallaxBG>
       <div className="container-fluid">
         <div className="container col-md-8 offset-md-2 pt-5">
           <Post
