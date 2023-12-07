@@ -51,6 +51,8 @@ jobs:
               # Now we have got the access of EC2 and we will start the deploy.
               
               cd client &&
+              npm ci --force &&
+              npm run build --force &&
               touch .env.local &&
               echo "${{ secrets.PROD_ENV_FILE }}" > .env.local &&
               pm2 start npm -- start --update-env
