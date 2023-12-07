@@ -54,5 +54,6 @@ jobs:
               cd client &&
               touch .env.local &&
               echo "${{ secrets.PROD_ENV_FILE }}" > .env.local &&
+              npm run build --force &&
               pm2 start npm -- start --update-env
               '
