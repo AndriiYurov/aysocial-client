@@ -8,10 +8,11 @@ const ParallaxBG = ({ url, children }) => {
         padding: "100px 0px 75px 0px",
         backgroundRepeat: "no-repeat",
         backgroundSize: "auto",
-        backgroundPosition: "center center",
+        backgroundPosition: "center -18rem",
         display: "block",
         height: "auto",
         margin: "-70px 0 0 0",
+        
       }}
     >
       <h1 className="display-1 font-weight-bold text-center bg-text">
