@@ -32,14 +32,14 @@ const PostPublic = ({ post, commentsCount = 3 }) => {
               state.user &&
               post.likes &&
               post.likes.includes(state.user._id) ? (
-                <HeartFilled className="text-danger pt-2 h5 px-1" />
+                <HeartFilled className="text-secondary pt-2 h5 px-1" />
               ) : (
-                <HeartOutlined className="text-danger pt-2 h5 px-1" />
+                <HeartOutlined className="text-secondary pt-2 h5 px-1" />
               )}
               <div className="pt-2 pl-3" style={{ marginRight: "1rem" }}>
                 {post.likes.length} likes
               </div>
-              <CommentOutlined className="text-danger pt-2 h5 px-1" />
+              <CommentOutlined className="text-secondary pt-2 h5 px-1" />
               <div className="pt-2 pl-3">{post.comments.length} comments</div>
             </div>
           </div>

@@ -21,6 +21,7 @@ const Home = ({ posts }) => {
   const { state, setState } = useContext(UserContext);
   const router = useRouter();
   const [newsFeed, setNewsFeed] = useState([]);
+  const [ok, setOk] = useState(false);
 
   // useEffect(() => {
   //   socket.on("receive-message", (newMessage) => {
@@ -33,6 +34,26 @@ const Home = ({ posts }) => {
       setNewsFeed([newPost, ...posts]);
     });
   }, []);
+
+  useEffect(() => {
+    if ((state && state.token) || (state && state.google_token)) {
+      getCurrentUser();
+    }
+    // state && state.token && getCurrentUser();
+    // state && state.google_token && getCurrentUser();
+  }, [state && state.token, state && state.google_token]);
+
+  const getCurrentUser = async () => {
+    try {
+      const { data } = await axios.get(
+        `/current-user`
+      
+      );
+      if (data.ok) setOk(true);
+    } catch (err) {
+      router.push("/login");
+    }
+  };
 
   const collection = newsFeed.length > 0 ? newsFeed : posts;
 
@@ -70,7 +91,7 @@ const Home = ({ posts }) => {
         
           {collection.map((post) => (
             <div key={post._id} className="col-md-7">
-              <Link className="nav-link" href={`/post/view/${post._id}`}>
+              <Link className="nav-link" href={!ok ? `/post/view/${post._id}` : `/post/${post._id}`}>
                 <PostPublic post={post} />
               </Link>
             </div>

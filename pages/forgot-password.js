@@ -6,7 +6,6 @@ import Link from "next/link";
 import { UserContext } from "../context";
 import { useRouter } from "next/router";
 
-
 import ForgotPasswordForm from "../components/forms/ForgotPasswordForm";
 
 const ForgotPassword = () => {
@@ -29,8 +28,8 @@ const ForgotPassword = () => {
         secret,
       });
       if (data.error) {
-        toast.error(data.error)
-        setLoading(false)
+        toast.error(data.error);
+        setLoading(false);
       } else {
         setEmail("");
         setNewPassword("");
@@ -38,9 +37,8 @@ const ForgotPassword = () => {
         setOk(data.ok);
         setLoading(false);
       }
-      
     } catch (err) {
-        console.log(err)
+      console.log(err);
       toast.error(err.response.data);
       setLoading(false);
     }
@@ -80,7 +78,7 @@ const ForgotPassword = () => {
             footer={null}
           >
             <p>Congrats! You can now login with your new password</p>
-            <Link href="/login" className="btn btn-primary btn-sm">
+            <Link href="/login" className="btn btn-success btn-sm">
               Login
             </Link>
           </Modal>

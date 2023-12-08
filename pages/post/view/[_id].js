@@ -4,6 +4,8 @@ import Head from "next/head";
 import PostPublic from "../../../components/cards/PostPublic";
 
 import { useRouter } from "next/router";
+import UserRoute from "../../../components/routes/UserRoute";
+import Post from "../../../components/cards/Post";
 
 const SinglePost = ({ post }) => {
   const router = useRouter();
@@ -38,6 +40,13 @@ const SinglePost = ({ post }) => {
         <div className="row pt-5">
           <div className="col-md-8 offset-md-2">
             <PostPublic post={post} />
+            <UserRoute>
+              
+            <Post
+            post={post}
+            
+          />
+            </UserRoute>
           </div>
         </div>
       </div>

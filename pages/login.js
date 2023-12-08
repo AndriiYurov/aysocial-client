@@ -7,7 +7,6 @@ import { useRouter } from "next/router";
 import { UserContext } from "../context";
 import { useGoogleLogin } from "@react-oauth/google";
 
-
 import AuthForm from "../components/forms/AuthForm";
 import ParallaxBG from "../components/cards/ParallaxBG";
 
@@ -40,22 +39,20 @@ const Login = () => {
   const handleGoogleUser = async () => {
     try {
       const { data } = await axios.post(`/login`, {
-              google_token: userGoogle.access_token, //send google token to backend
-            });
-            console.log("data from login Google => ", data)
+        google_token: userGoogle.access_token, //send google token to backend
+      });
+      console.log("data from login Google => ", data);
 
-            setState({
-              user: data.user,
-              token: data.google_token,
-            });
-    
-            window.localStorage.setItem("auth", JSON.stringify(data));
-            router.push("/user/dashboard");
-            
+      setState({
+        user: data.user,
+        token: data.google_token,
+      });
+
+      window.localStorage.setItem("auth", JSON.stringify(data));
+      router.push("/user/dashboard");
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
-    
   };
 
   const handleSubmit = async (e) => {
@@ -66,7 +63,7 @@ const Login = () => {
         email,
         password,
       });
-      console.log("data from login => ", data)
+      console.log("data from login => ", data);
 
       if (data.error) {
         toast.error(data.error);
@@ -92,52 +89,51 @@ const Login = () => {
 
   return (
     <>
-     
-    <ParallaxBG url="/images/default.jpg">
-            Login
-      </ParallaxBG>
-    <div className="container-fluid">
-      {/* <div className="row py-5 text-light bg-default-image">
+      <ParallaxBG url="/images/default.jpg">Login</ParallaxBG>
+      <div className="container-fluid">
+        {/* <div className="row py-5 text-light bg-default-image">
         <div className="col text-center">
           <h1>Login</h1>
         </div>
       </div> */}
 
-      <div className="row py-5">
-        <div className="col-md-6 offset-md-3">
-          <AuthForm
-            handleSubmit={handleSubmit}
-            email={email}
-            setEmail={setEmail}
-            password={password}
-            setPassword={setPassword}
-            loading={loading}
-            page="login"
-          />
+        <div className="row py-5">
+          <div className="col-md-6 offset-md-3">
+            <AuthForm
+              handleSubmit={handleSubmit}
+              email={email}
+              setEmail={setEmail}
+              password={password}
+              setPassword={setPassword}
+              loading={loading}
+              page="login"
+            />
+          </div>
         </div>
-      </div>
 
-      <div className="d-flex justify-content-center mb-2 p-3">
-        <button className="btn btn-secondary" onClick={loginGoogle}>Login with Google</button>
-      </div>
+        <div className="d-flex justify-content-center mb-2 p-3">
+          <button className="btn btn-success" onClick={loginGoogle}>
+            Login with Google
+          </button>
+        </div>
 
-      <div className="row">
-        <div className="col">
-          <p className="text-center">
-            Not yet registered? <Link href="/register">Register</Link>
-          </p>
+        <div className="row">
+          <div className="col">
+            <p className="text-center">
+              Not yet registered? <Link href="/register">Register</Link>
+            </p>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col">
+            <p className="text-center">
+              <Link className="text-danger" href="/forgot-password">
+                Forgot password
+              </Link>
+            </p>
+          </div>
         </div>
       </div>
-      <div className="row">
-        <div className="col">
-          <p className="text-center">
-            <Link className="text-danger" href="/forgot-password">
-              Forgot password
-            </Link>
-          </p>
-        </div>
-      </div>
-    </div>
     </>
   );
 };

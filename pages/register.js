@@ -46,56 +46,54 @@ const Register = () => {
 
   return (
     <>
-    <ParallaxBG url="/images/default.jpg">
-            Register
-      </ParallaxBG>
-    <div className="container-fluid">
-      {/* <div className="row py-5 text-light bg-default-image">
+      <ParallaxBG url="/images/default.jpg">Register</ParallaxBG>
+      <div className="container-fluid">
+        {/* <div className="row py-5 text-light bg-default-image">
         <div className="col text-center">
           <h1>Register</h1>
         </div>
       </div> */}
 
-      <div className="row py-5">
-        <div className="col-md-6 offset-md-3">
-          <AuthForm
-            handleSubmit={handleSubmit}
-            name={name}
-            setName={setName}
-            email={email}
-            setEmail={setEmail}
-            password={password}
-            setPassword={setPassword}
-            secret={secret}
-            setSecret={setSecret}
-            loading={loading}
-          />
+        <div className="row py-5">
+          <div className="col-md-6 offset-md-3">
+            <AuthForm
+              handleSubmit={handleSubmit}
+              name={name}
+              setName={setName}
+              email={email}
+              setEmail={setEmail}
+              password={password}
+              setPassword={setPassword}
+              secret={secret}
+              setSecret={setSecret}
+              loading={loading}
+            />
+          </div>
         </div>
-      </div>
 
-      <div className="row">
-        <div className="col">
-          <Modal
-            title="Congratulation"
-            open={ok}
-            onCancel={() => setOk(false)}
-            footer={null}
-          >
-            <p>You have successfully registered</p>
-            <Link href="/login" className="btn btn-primary btn-sm">
-              Login
-            </Link>
-          </Modal>
+        <div className="row">
+          <div className="col">
+            <Modal
+              title="Congratulation"
+              open={ok}
+              onCancel={() => setOk(false)}
+              footer={null}
+            >
+              <p>You have successfully registered</p>
+              <Link href="/login" className="btn btn-success btn-sm">
+                Login
+              </Link>
+            </Modal>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col">
+            <p className="text-center">
+              Already registered? <Link href="/login">Login</Link>
+            </p>
+          </div>
         </div>
       </div>
-      <div className="row">
-        <div className="col">
-          <p className="text-center">
-            Already registered? <Link href="/login">Login</Link>
-          </p>
-        </div>
-      </div>
-    </div>
     </>
   );
 };

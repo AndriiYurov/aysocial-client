@@ -134,7 +134,7 @@ const AuthForm = ({
             ? !name || !email || !password || !secret || loading
             : !email || !password || loading
         }
-        className="btn btn-secondary col-12"
+        className="btn btn-success col-12"
       >
         {loading ? <SyncOutlined spin className="py-1" /> : "Submit"}
       </button>

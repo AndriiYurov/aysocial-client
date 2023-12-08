@@ -8,7 +8,7 @@ const CommentForm = ({ addComment, comment, setComment }) => {
         value={comment}
         onChange={(e) => setComment(e.target.value)}
       />
-      <button className="btn btn-primary btn-sm btn-block mt-3">Submit</button>
+      <button className="btn btn-success btn-sm btn-block mt-3">Submit</button>
     </form>
   );
 };

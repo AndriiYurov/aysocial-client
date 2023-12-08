@@ -44,19 +44,19 @@ const Post = ({
           <div className="card-body">{renderHTML(post.content)}</div>
           <div className="card-footer">
             {post.image && <PostImage url={post.image.url} />}
-            <div className="d-flex p-2">
+            <div className="d-flex p-1">
               {state &&
               state.user &&
               post.likes &&
               post.likes.includes(state.user._id) ? (
                 <HeartFilled
                   onClick={() => handleUnlike(post._id)}
-                  className="text-danger pt-2 h5 px-2"
+                  className="text-secondary pt-2 h5 px-2"
                 />
               ) : (
                 <HeartOutlined
                   onClick={() => handleLike(post._id)}
-                  className="text-danger pt-2 h5 px-2"
+                  className="text-secondary pt-2 h5 px-2"
                 />
               )}
               <div className="pt-2 pl-3" style={{ marginRight: "1rem" }}>
@@ -64,7 +64,7 @@ const Post = ({
               </div>
               <CommentOutlined
                 onClick={() => handleComment(post)}
-                className="text-danger pt-2 h5 px-2"
+                className="text-secondary pt-2 h5 px-2"
               />
               <div className="pt-2 pl-3">
                 <Link
@@ -79,11 +79,11 @@ const Post = ({
                 <>
                   <EditOutlined
                     onClick={() => router.push(`/user/post/${post._id}`)}
-                    className="text-danger pt-2 h5 px-2 mx-auto"
+                    className="text-secondary pt-2 h5 px-2 mx-auto"
                   />
-                  <DeleteOutlined
+                  <DeleteOutlined style={{color: "black"}}
                     onClick={() => handleDelete(post)}
-                    className="text-danger pt-2 h5 px-2"
+                    className="text-secondary pt-2 h5 px-2"
                   />
                 </>
               )}
