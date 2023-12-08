@@ -38,7 +38,7 @@ const PostForm = ({
           ) : (
             <CameraOutlined className="mt-2" />
           )}
-          <input onChange={handleImage} type="file" accept="images/*" hidden />
+          <input onChange={handleImage} type="file" accept="images/*" capture hidden />
         </label>
       </div>
     </div>
