@@ -53,7 +53,7 @@ const Home = () => {
     } catch (err) {
       console.log(err);
     }
-    window.scrollTo(0, 0);
+    
   }, []);
 
   const newsFeed = async () => {
@@ -209,8 +209,10 @@ const Home = () => {
 
   const handlePaginationChange = (value) => {
     setPage(value);
-    scrollContainerRef.current.scrollTop = 0;
-    window.scrollTo(0, 0);
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   };
 
   return (
@@ -223,7 +225,7 @@ const Home = () => {
           </div>
         </div> */}
         <div className="row py-3">
-          <div ref={scrollContainerRef} className="col-md-6 sc custom-scrollbar">
+          <div ref={scrollContainerRef} className="col-md-6 custom-scrollbar">
             <PostForm
               content={content}
               setContent={setContent}

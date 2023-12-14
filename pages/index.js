@@ -8,6 +8,7 @@ import PostPublic from "../components/cards/PostPublic";
 import Post from "../components/cards/Post";
 import { useRouter } from "next/router";
 import io from "socket.io-client";
+import { ArrowUpOutlined } from "@ant-design/icons";
 
 const socket = io(
   process.env.NEXT_PUBLIC_SOCKETIO,
@@ -22,6 +23,7 @@ const Home = ({ posts }) => {
   const router = useRouter();
   const [newsFeed, setNewsFeed] = useState([]);
   const [ok, setOk] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   // useEffect(() => {
   //   socket.on("receive-message", (newMessage) => {
@@ -33,6 +35,14 @@ const Home = ({ posts }) => {
     socket.on("new-post", (newPost) => {
       setNewsFeed([newPost, ...posts]);
     });
+
+    // Add scroll event listener when the component mounts
+    window.addEventListener("scroll", handleScroll);
+
+    // Clean up the event listener when the component unmounts
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   useEffect(() => {
@@ -42,6 +52,18 @@ const Home = ({ posts }) => {
     // state && state.token && getCurrentUser();
     // state && state.google_token && getCurrentUser();
   }, [state && state.token, state && state.google_token]);
+
+  const handleScroll = () => {
+    setIsVisible(window.scrollY > 100);
+  };
+
+  const scrollToTop = () => {
+    // Scroll to the top of the page
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
 
   const getCurrentUser = async () => {
     try {
@@ -75,7 +97,7 @@ const Home = ({ posts }) => {
         />
       </Head>
       <ParallaxBG url="/images/default.jpg">AY Social</ParallaxBG>
-      <div className="container-fluid">
+      <div className="container-fluid flex-column d-flex align-items-center">
         {/* <button
           onClick={() => {
             socket.emit("send-message", "This is rayan!!!");
@@ -83,10 +105,17 @@ const Home = ({ posts }) => {
         >
           Send message
         </button> */}
+        
+        <button
+        className={`scroll-to-top-button ${isVisible ? "visible" : ""}`}
+        onClick={scrollToTop}
+      >
+        <ArrowUpOutlined />
+      </button>
 
-        <div className="pt-3 flex-column d-flex align-items-center custom-scrollbar sc">
+        <div className="pt-3 custom-scrollbar col-md-6">
           {collection.map((post) => (
-            <div key={post._id} className="col-md-6">
+            <div key={post._id} className="">
               <Link
                 className="nav-link"
                 href={!ok ? `/post/view/${post._id}` : `/post/${post._id}`}
@@ -101,8 +130,9 @@ const Home = ({ posts }) => {
             //     </div>
           ))}
         </div>
+        
       </div>
-      <footer className="bd-footer py-2  bg-light">
+      {/* <footer className="bd-footer py-2  bg-light">
         <div className="row">
           <div className="col">
             <p className="text-center mt-2">
@@ -117,7 +147,8 @@ const Home = ({ posts }) => {
             </p>
           </div>
         </div>
-      </footer>
+      </footer> */}
+      
     </>
   );
 };

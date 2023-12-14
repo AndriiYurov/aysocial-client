@@ -26,7 +26,7 @@ const Nav = () => {
     
   };
   return (
-    <nav className="nav d-flex bg-dark justify-content-between" style={{opacity: "0.5", margin: "10px", borderRadius: "10px"}}>
+    <nav className="nav fixed-top d-flex bg-dark justify-content-between" style={{opacity: "0.5", margin: "10px", borderRadius: "10px"}}>
       <div className={`${current === "/" && "active"}`}>
         <Link href="/" className=" text-light hover">
           <Avatar className="logo" size={80} src="/images/logo.png"/>

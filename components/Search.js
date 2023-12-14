@@ -15,7 +15,7 @@ const Search = () => {
     // console.log(`Find "${query}" from db`);
     try {
       const { data } = await axios.get(`/search-user/${query}`);
-      //   console.log("search  user =>", data);
+      //console.log("search  user =>", data);
       setResult(data);
     } catch (err) {
       console.log(err);
@@ -38,7 +38,6 @@ const Search = () => {
       setResult(filtered);
       toast.success(`Following ${user.name}`);
       //rerender the posts
-      
     } catch (err) {
       console.log(err);
     }
@@ -64,7 +63,6 @@ const Search = () => {
 
   return (
     <>
-    
       <form className="form-inline row" onSubmit={searchUser}>
         <div className="col-8">
           <input
@@ -83,7 +81,15 @@ const Search = () => {
           </button>
         </div>
       </form>
-      {result &&
+      {result && result.length >= 1 && (
+        <People
+          people={result}
+          handleFollow={handleFollow}
+          handleUnfollow={handleUnfollow}
+        />
+      )}
+
+      {/* {result &&
         result.map((r) => (
           <People
             key={r._id}
@@ -91,7 +97,7 @@ const Search = () => {
             handleFollow={handleFollow}
             handleUnfollow={handleUnfollow}
           />
-        ))}
+        ))} */}
     </>
   );
 };

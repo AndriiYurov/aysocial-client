@@ -93,11 +93,9 @@ const Register = () => {
             </p>
           </div>
         </div>
-      </div>
-      <footer className="bd-footer py-2 fixed-bottom bg-light">
         <div className="row">
           <div className="col">
-            <p className="text-center mt-2">
+            <p className="text-center mt-3" style={{fontSize: "10px"}}>
               Created by{" "}
               <Link
                 className="link-underline-light"
@@ -109,7 +107,8 @@ const Register = () => {
             </p>
           </div>
         </div>
-      </footer>
+      </div>
+     
     </>
   );
 };

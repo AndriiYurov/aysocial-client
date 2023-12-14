@@ -42,9 +42,9 @@ const ProfileUpdate = () => {
     try {
       setLoading(true);
       const { data } = await axios.put(`/profile-update`, {
-        username,
+        username: username.trim(),
         about,
-        name,
+        name: name.trim(),
         email,
         password,
         secret,
