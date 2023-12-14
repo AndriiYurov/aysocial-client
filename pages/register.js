@@ -89,11 +89,27 @@ const Register = () => {
         <div className="row">
           <div className="col">
             <p className="text-center">
-              Already registered? <Link href="/login">Login</Link>
+              Already registered? <Link className="link-underline-light" href="/login">Login</Link>
             </p>
           </div>
         </div>
       </div>
+      <footer className="bd-footer py-2 fixed-bottom bg-light">
+        <div className="row">
+          <div className="col">
+            <p className="text-center mt-2">
+              Created by{" "}
+              <Link
+                className="link-underline-light"
+                href="https://www.linkedin.com/in/andrii-yurov-b7138925a/"
+                target="blank"
+              >
+                Andrii Yurov
+              </Link>
+            </p>
+          </div>
+        </div>
+      </footer>
     </>
   );
 };

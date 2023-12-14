@@ -45,10 +45,7 @@ const Home = ({ posts }) => {
 
   const getCurrentUser = async () => {
     try {
-      const { data } = await axios.get(
-        `/current-user`
-      
-      );
+      const { data } = await axios.get(`/current-user`);
       if (data.ok) setOk(true);
     } catch (err) {
       router.push("/login");
@@ -87,11 +84,13 @@ const Home = ({ posts }) => {
           Send message
         </button> */}
 
-        <div className="row pt-3 d-flex justify-content-center sc">
-        
+        <div className="pt-3 flex-column d-flex align-items-center custom-scrollbar sc">
           {collection.map((post) => (
-            <div key={post._id} className="col-md-7">
-              <Link className="nav-link" href={!ok ? `/post/view/${post._id}` : `/post/${post._id}`}>
+            <div key={post._id} className="col-md-6">
+              <Link
+                className="nav-link"
+                href={!ok ? `/post/view/${post._id}` : `/post/${post._id}`}
+              >
                 <PostPublic post={post} />
               </Link>
             </div>
@@ -101,9 +100,24 @@ const Home = ({ posts }) => {
 
             //     </div>
           ))}
-          
         </div>
       </div>
+      <footer className="bd-footer py-2  bg-light">
+        <div className="row">
+          <div className="col">
+            <p className="text-center mt-2">
+              Created by{" "}
+              <Link
+                className="link-underline-light"
+                href="https://www.linkedin.com/in/andrii-yurov-b7138925a/"
+                target="blank"
+              >
+                Andrii Yurov
+              </Link>
+            </p>
+          </div>
+        </div>
+      </footer>
     </>
   );
 };

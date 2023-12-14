@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect, useRef } from "react";
 import { UserContext } from "../../context";
 import UserRoute from "../../components/routes/UserRoute";
 import PostForm from "../../components/forms/PostForm";
@@ -23,6 +23,7 @@ const socket = io(
 );
 
 const Home = () => {
+  const scrollContainerRef = useRef(null);
   const { state, setState } = useContext(UserContext);
 
   const [content, setContent] = useState("");
@@ -208,20 +209,21 @@ const Home = () => {
 
   const handlePaginationChange = (value) => {
     setPage(value);
+    scrollContainerRef.current.scrollTop = 0;
     window.scrollTo(0, 0);
   };
 
   return (
     <UserRoute>
       <ParallaxBG url="/images/default.jpg">News feed</ParallaxBG>
-      <div className="container-fluid">
+      <div className="container">
         {/* <div className="row py-5 text-light bg-default-image">
           <div className="col text-center">
             <h1>News feed</h1>
           </div>
         </div> */}
         <div className="row py-3">
-          <div className="col-md-8">
+          <div ref={scrollContainerRef} className="col-md-6 sc custom-scrollbar">
             <PostForm
               content={content}
               setContent={setContent}
@@ -248,7 +250,7 @@ const Home = () => {
             />
           </div>
 
-          <div className="col-md-4">
+          <div className="col-md-5">
             <Search />
             <br />
             {state && state.user && state.user.following && (

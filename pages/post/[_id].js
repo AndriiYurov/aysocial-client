@@ -115,7 +115,7 @@ const PostComments = () => {
     <>
       <ParallaxBG url="/images/default.jpg">Comments</ParallaxBG>
       <div className="container-fluid">
-        <div className="container col-md-8 offset-md-2 pt-5">
+        <div className="container col-md-5  pt-5">
           <Post
             post={post}
             commentsCount={100}

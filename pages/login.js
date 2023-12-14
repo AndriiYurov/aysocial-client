@@ -120,20 +120,36 @@ const Login = () => {
         <div className="row">
           <div className="col">
             <p className="text-center">
-              Not yet registered? <Link href="/register">Register</Link>
+              Not yet registered? <Link className="link-underline-light" href="/register">Register</Link>
             </p>
           </div>
         </div>
         <div className="row">
           <div className="col">
             <p className="text-center">
-              <Link className="text-danger" href="/forgot-password">
+              <Link className="text-danger link-underline-light" href="/forgot-password">
                 Forgot password
               </Link>
             </p>
           </div>
         </div>
       </div>
+      <footer className="bd-footer py-2 fixed-bottom bg-light">
+        <div className="row">
+          <div className="col">
+            <p className="text-center mt-2">
+              Created by{" "}
+              <Link
+                className="link-underline-light"
+                href="https://www.linkedin.com/in/andrii-yurov-b7138925a/"
+                target="blank"
+              >
+                Andrii Yurov
+              </Link>
+            </p>
+          </div>
+        </div>
+      </footer>
     </>
   );
 };

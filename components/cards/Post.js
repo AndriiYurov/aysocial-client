@@ -92,7 +92,7 @@ const Post = ({
           {/* 2 comments */}
           {post.comments && post.comments.length > 0 && (
             <ol
-              className="list-group"
+              className="list-group custom-scrollbar"
               style={{ maxHeight: "125px", overflow: "scroll" }}
             >
               {post.comments.slice(0, commentsCount).map((c) => (
