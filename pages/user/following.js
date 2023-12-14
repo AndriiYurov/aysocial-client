@@ -67,7 +67,13 @@ const Following = () => {
               avatar={<Avatar src={imageSource(user)} />}
               title={
                 <div className="d-flex justify-content-between">
-                  {user.username}{" "}
+                  {/* {user.username}{" "} */}
+                  <Link
+                    className="link-underline-light"
+                    href={`/user/${user.username}`}
+                  >
+                    {user.username}
+                  </Link>
                   <span
                     onClick={() => handleUnfollow(user)}
                     className="text-primary pointer"

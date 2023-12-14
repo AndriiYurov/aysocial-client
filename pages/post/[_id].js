@@ -86,7 +86,7 @@ const PostComments = () => {
         postId: currentPost._id,
         comment,
       });
-      console.log("add coment", data);
+      // console.log("add coment", data);
       setComment("");
       setVisible(false);
       fetchPost();
@@ -126,25 +126,25 @@ const PostComments = () => {
             addComment={addComment}
           />
         </div>
-        <Link
-          className="d-flex justify-content-center p-5"
-          href="/user/dashboard"
+        <div
+          className="d-flex justify-content-center p-5 pointer"
+          onClick={() => router.back()}
         >
           <RollbackOutlined />
-        </Link>
+        </div>
       </div>
       <Modal
-          open={visible}
-          onCancel={() => setVisible(false)}
-          title="Comment"
-          footer={null}
-        >
-          <CommentForm
-            comment={comment}
-            setComment={setComment}
-            addComment={addComment}
-          />
-        </Modal>
+        open={visible}
+        onCancel={() => setVisible(false)}
+        title="Comment"
+        footer={null}
+      >
+        <CommentForm
+          comment={comment}
+          setComment={setComment}
+          addComment={addComment}
+        />
+      </Modal>
     </>
   );
 };

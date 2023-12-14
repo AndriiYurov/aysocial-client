@@ -41,7 +41,7 @@ const Login = () => {
       const { data } = await axios.post(`/login`, {
         google_token: userGoogle.access_token, //send google token to backend
       });
-      console.log("data from login Google => ", data);
+      // console.log("data from login Google => ", data);
 
       setState({
         user: data.user,
@@ -49,7 +49,7 @@ const Login = () => {
       });
 
       window.localStorage.setItem("auth", JSON.stringify(data));
-      router.push("/user/dashboard");
+      // router.push("/user/dashboard");
     } catch (err) {
       console.log(err);
     }
@@ -63,7 +63,7 @@ const Login = () => {
         email,
         password,
       });
-      console.log("data from login => ", data);
+      // console.log("data from login => ", data);
 
       if (data.error) {
         toast.error(data.error);
@@ -84,8 +84,10 @@ const Login = () => {
     }
   };
 
-  if (state && state.token) router.push("/user/dashboard");
-  if (state && state.google_token) router.push("/user/dashboard");
+ 
+
+  if (state && state.google_token || state && state.token) router.push("/user/dashboard");
+  // if (state && state.google_token) router.push("/user/dashboard");
 
   return (
     <>
@@ -120,14 +122,20 @@ const Login = () => {
         <div className="row">
           <div className="col">
             <p className="text-center">
-              Not yet registered? <Link className="link-underline-light" href="/register">Register</Link>
+              Not yet registered?{" "}
+              <Link className="link-underline-light" href="/register">
+                Register
+              </Link>
             </p>
           </div>
         </div>
         <div className="row">
           <div className="col">
             <p className="text-center">
-              <Link className="text-danger link-underline-light" href="/forgot-password">
+              <Link
+                className="text-danger link-underline-light"
+                href="/forgot-password"
+              >
                 Forgot password
               </Link>
             </p>
@@ -135,7 +143,7 @@ const Login = () => {
         </div>
         <div className="row">
           <div className="col">
-            <p className="text-center mt-3" style={{fontSize: "10px"}}>
+            <p className="text-center mt-3" style={{ fontSize: "10px" }}>
               Created by{" "}
               <Link
                 className="link-underline-light"
@@ -148,7 +156,6 @@ const Login = () => {
           </div>
         </div>
       </div>
-      
     </>
   );
 };

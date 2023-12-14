@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import renderHTML from "react-render-html";
 import moment from "moment";
 import { Avatar } from "antd";
@@ -26,6 +26,8 @@ const Post = ({
 }) => {
   const { state } = useContext(UserContext);
   const router = useRouter();
+
+  
 
   return (
     <>
