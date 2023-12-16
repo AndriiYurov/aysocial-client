@@ -81,11 +81,11 @@ const Username = () => {
   };
 
   return (
-    <div className="row col-md-6 offset-md-4">
+    <div className="row col-md-6 offset-md-3">
       {/* <pre>{JSON.stringify(user, null, 4)}</pre> */}
       <div className="mt-3 d-flex justify-content-center pt-5 pb-5">
         <Card className="w-50" hoverable cover={<img src={imageSource(user)} alt={user.name} />}>
-          <Meta title={user.name} description={user.about} />
+          <Meta title={user.username} description={user.about} />
 
           <p className="pt-2 text-muted">
             Joinet {moment(user.createdAt).fromNow()}
