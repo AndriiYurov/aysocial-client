@@ -1,3 +1,3 @@
 # Exclude files from pull requests
-*.yml export-ignore
-.github/** export-ignore
+*.yml linguist-generated=true
+.github/** linguist-generated=true
