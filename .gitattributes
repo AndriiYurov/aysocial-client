@@ -1,0 +1,3 @@
+# Exclude files from pull requests
+*.yml linguist-generated=true
+.github/** linguist-generated=true
