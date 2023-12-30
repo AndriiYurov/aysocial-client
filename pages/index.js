@@ -27,38 +27,36 @@ const Home = ({ posts }) => {
 
   // set scroll restoration to manual
   useEffect(() => {
-    if (
-      "scrollRestoration" in history &&
-      history.scrollRestoration !== "manual"
-    ) {
-      history.scrollRestoration = "manual";
+    if ('scrollRestoration' in history && history.scrollRestoration !== 'manual') {
+      history.scrollRestoration = 'manual';
     }
   }, []);
 
   // handle and store scroll position
   useEffect(() => {
     const handleRouteChange = () => {
-      sessionStorage.setItem("scrollPosition", window.scrollY.toString());
+      sessionStorage.setItem('scrollPosition', window.scrollY.toString());
     };
-    router.events.on("routeChangeStart", handleRouteChange);
+    router.events.on('routeChangeStart', handleRouteChange);
     return () => {
-      router.events.off("routeChangeStart", handleRouteChange);
+      router.events.off('routeChangeStart', handleRouteChange);
     };
   }, [router.events]);
 
   // restore scroll position
   useEffect(() => {
-    if ("scrollPosition" in sessionStorage) {
-      window.scrollTo(0, Number(sessionStorage.getItem("scrollPosition")));
-      sessionStorage.removeItem("scrollPosition");
+    if ('scrollPosition' in sessionStorage) {
+      window.scrollTo(0, Number(sessionStorage.getItem('scrollPosition')));
+      sessionStorage.removeItem('scrollPosition');
     }
   }, []);
 
   useEffect(() => {
-    postsList();
     socket.on("new-post", (newPost) => {
       setNewsFeed([newPost, ...posts]);
     });
+
+   
 
     // Add scroll event listener when the component mounts
     window.addEventListener("scroll", handleScroll);
@@ -89,15 +87,6 @@ const Home = ({ posts }) => {
     });
   };
 
-  const postsList = async () => {
-    try {
-      const { data } = await axios.get("/posts");
-      setNewsFeed(data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   const getCurrentUser = async () => {
     try {
       const { data } = await axios.get(`/current-user`);
@@ -107,7 +96,7 @@ const Home = ({ posts }) => {
     }
   };
 
-  // const collection = newsFeed.length > 0 ? newsFeed : posts;
+  const collection = newsFeed.length > 0 ? newsFeed : posts;
 
   return (
     <>
@@ -147,7 +136,7 @@ const Home = ({ posts }) => {
         </button>
 
         <div className="pt-3 custom-scrollbar col-md-6">
-          {newsFeed.map((post) => (
+          {collection.map((post) => (
             <div key={post._id} id={post._id}>
               <Link
                 className="nav-link"
@@ -184,14 +173,14 @@ const Home = ({ posts }) => {
   );
 };
 
-// export async function getServerSideProps() {
-//   const { data } = await axios.get("/posts");
-//   // console.log(data);
-//   return {
-//     props: {
-//       posts: data,
-//     },
-//   };
-// }
+export async function getServerSideProps() {
+  const { data } = await axios.get("/posts");
+  // console.log(data);
+  return {
+    props: {
+      posts: data,
+    },
+  };
+}
 
 export default Home;
