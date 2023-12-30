@@ -25,38 +25,16 @@ const Home = ({ posts }) => {
   const [ok, setOk] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
-  // set scroll restoration to manual
-  useEffect(() => {
-    if ('scrollRestoration' in history && history.scrollRestoration !== 'manual') {
-      history.scrollRestoration = 'manual';
-    }
-  }, []);
-
-  // handle and store scroll position
-  useEffect(() => {
-    const handleRouteChange = () => {
-      sessionStorage.setItem('scrollPosition', window.scrollY.toString());
-    };
-    router.events.on('routeChangeStart', handleRouteChange);
-    return () => {
-      router.events.off('routeChangeStart', handleRouteChange);
-    };
-  }, [router.events]);
-
-  // restore scroll position
-  useEffect(() => {
-    if ('scrollPosition' in sessionStorage) {
-      window.scrollTo(0, Number(sessionStorage.getItem('scrollPosition')));
-      sessionStorage.removeItem('scrollPosition');
-    }
-  }, []);
+  // useEffect(() => {
+  //   socket.on("receive-message", (newMessage) => {
+  //     setText(newMessage);
+  //   });
+  // }, []);
 
   useEffect(() => {
     socket.on("new-post", (newPost) => {
       setNewsFeed([newPost, ...posts]);
     });
-
-   
 
     // Add scroll event listener when the component mounts
     window.addEventListener("scroll", handleScroll);
@@ -127,17 +105,17 @@ const Home = ({ posts }) => {
         >
           Send message
         </button> */}
-
+        
         <button
-          className={`scroll-to-top-button ${isVisible ? "visible" : ""}`}
-          onClick={scrollToTop}
-        >
-          <ArrowUpOutlined />
-        </button>
+        className={`scroll-to-top-button ${isVisible ? "visible" : ""}`}
+        onClick={scrollToTop}
+      >
+        <ArrowUpOutlined />
+      </button>
 
         <div className="pt-3 custom-scrollbar col-md-6">
           {collection.map((post) => (
-            <div key={post._id} id={post._id}>
+            <div key={post._id} className="">
               <Link
                 className="nav-link"
                 href={!ok ? `/post/view/${post._id}` : `/post/${post._id}`}
@@ -152,6 +130,7 @@ const Home = ({ posts }) => {
             //     </div>
           ))}
         </div>
+        
       </div>
       {/* <footer className="bd-footer py-2  bg-light">
         <div className="row">
@@ -169,6 +148,7 @@ const Home = ({ posts }) => {
           </div>
         </div>
       </footer> */}
+      
     </>
   );
 };
