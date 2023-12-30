@@ -97,7 +97,7 @@ const Home = ({ posts }) => {
   };
 
   const collection = newsFeed.length > 0 ? newsFeed : posts;
-
+ 
   return (
     <>
       <Head>
@@ -136,7 +136,7 @@ const Home = ({ posts }) => {
         </button>
 
         <div className="pt-3 custom-scrollbar col-md-6">
-          {collection.map((post) => (
+          {newsFeed.map((post) => (
             <div key={post._id} id={post._id}>
               <Link
                 className="nav-link"
