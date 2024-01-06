@@ -77,7 +77,7 @@ const Home = ({ posts }) => {
   const collection = newsFeed.length > 0 ? newsFeed : posts;
 
   return (
-    <>
+    <div>
       <Head>
         <title>AY Social - A social network</title>
         <meta
@@ -105,23 +105,31 @@ const Home = ({ posts }) => {
         >
           Send message
         </button> */}
-        
+
         <button
-        className={`scroll-to-top-button ${isVisible ? "visible" : ""}`}
-        onClick={scrollToTop}
-      >
-        <ArrowUpOutlined />
-      </button>
+          className={`scroll-to-top-button ${isVisible ? "visible" : ""}`}
+          onClick={scrollToTop}
+        >
+          <ArrowUpOutlined />
+        </button>
 
         <div className="pt-3 custom-scrollbar col-md-6">
           {collection.map((post) => (
-            <div key={post._id} className="">
-              <Link
+            <div
+              onClick={() =>
+                router.push(
+                  !ok ? `/post/view/${post._id}` : `/post/${post._id}`
+                )
+              }
+              key={post._id}
+            >
+              <PostPublic post={post} />
+              {/* <Link
                 className="nav-link"
                 href={!ok ? `/post/view/${post._id}` : `/post/${post._id}`}
               >
                 <PostPublic post={post} />
-              </Link>
+              </Link> */}
             </div>
 
             // <div onClick={() => router.push(`/post/${post._id}`)} key={post._id} className="col-md-4">
@@ -130,7 +138,6 @@ const Home = ({ posts }) => {
             //     </div>
           ))}
         </div>
-        
       </div>
       {/* <footer className="bd-footer py-2  bg-light">
         <div className="row">
@@ -148,8 +155,7 @@ const Home = ({ posts }) => {
           </div>
         </div>
       </footer> */}
-      
-    </>
+    </div>
   );
 };
 
