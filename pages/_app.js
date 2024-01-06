@@ -1,5 +1,6 @@
 import { UserProvider } from "../context";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "mdb-react-ui-kit/dist/css/mdb.min.css";
 import Nav from "../components/Nav";
 import Head from "next/head";
 import { ToastContainer } from "react-toastify";
