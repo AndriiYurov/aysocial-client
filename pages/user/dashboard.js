@@ -53,7 +53,8 @@ const Home = () => {
     } catch (err) {
       console.log(err);
     }
-  }, []);
+    //console.log("posts", posts)
+  }, [posts]);
 
   const newsFeed = async () => {
     try {
