@@ -10,6 +10,9 @@ const UserProvider = ({ children }) => {
     token: "",
   });
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const [scrollPosition, setScrollPosition] = useState(0);
+
   useEffect(() => {
     setState(JSON.parse(window.localStorage.getItem("auth")));
   }, []);
@@ -38,7 +41,7 @@ const UserProvider = ({ children }) => {
   );
 
   return (
-    <UserContext.Provider value={{ state, setState }}>
+    <UserContext.Provider value={{ state, setState, currentPage, setCurrentPage, scrollPosition, setScrollPosition }}>
       {children}
     </UserContext.Provider>
   );

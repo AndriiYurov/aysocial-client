@@ -4,6 +4,15 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import PostForm from "../../../components/forms/PostForm";
 import UserRoute from "../../../components/routes/UserRoute";
+import io from "socket.io-client";
+
+const socket = io(
+  process.env.NEXT_PUBLIC_SOCKETIO,
+  { path: "/socket.io" },
+  {
+    reconnection: true,
+  }
+);
 
 const EditPost = () => {
   const [post, setPost] = useState({});
@@ -50,12 +59,16 @@ const EditPost = () => {
   const postSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.put(`/update-post/${_id}`, { content, image });
+      const { data } = await axios.put(`/update-post/${_id}`, {
+        content,
+        image,
+      });
       if (data.error) {
         toast.error(data.error);
       } else {
         toast.success("Post updated");
         router.push("/user/dashboard");
+        socket.emit("new-post", data);
       }
     } catch (err) {
       console.log(err);

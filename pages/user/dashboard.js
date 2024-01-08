@@ -53,8 +53,8 @@ const Home = () => {
     } catch (err) {
       console.log(err);
     }
-    
-  }, []);
+    //console.log("posts", posts)
+  }, [posts]);
 
   const newsFeed = async () => {
     try {
@@ -119,6 +119,7 @@ const Home = () => {
       const { data } = await axios.delete(`/delete-post/${post._id}`);
       toast.error("Post deleted");
       newsFeed();
+      socket.emit("new-post", data);
     } catch (err) {
       console.log(err);
     }
@@ -152,6 +153,7 @@ const Home = () => {
       const { data } = await axios.put("/like-post", { _id });
       // console.log("liked", data);
       newsFeed();
+      socket.emit("new-post", data);
     } catch (err) {
       console.log(err);
     }
@@ -163,6 +165,7 @@ const Home = () => {
       const { data } = await axios.put("/unlike-post", { _id });
       // console.log("unliked", data);
       newsFeed();
+      socket.emit("new-post", data);
     } catch (err) {
       console.log(err);
     }
@@ -186,6 +189,7 @@ const Home = () => {
       setComment("");
       setVisible(false);
       newsFeed();
+      socket.emit("new-post", data);
     } catch (err) {
       console.log(err);
     }
@@ -202,6 +206,7 @@ const Home = () => {
       });
       console.log("comment removed", data);
       newsFeed();
+      socket.emit("new-post", data);
     } catch (err) {
       console.log(err);
     }

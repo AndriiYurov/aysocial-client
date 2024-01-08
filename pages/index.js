@@ -9,6 +9,7 @@ import Post from "../components/cards/Post";
 import { useRouter } from "next/router";
 import io from "socket.io-client";
 import { ArrowUpOutlined } from "@ant-design/icons";
+import Pagination from "../components/Pagination";
 
 const socket = io(
   process.env.NEXT_PUBLIC_SOCKETIO,
@@ -20,22 +21,39 @@ const socket = io(
 
 const Home = ({ posts }) => {
   const { state, setState } = useContext(UserContext);
+  const { currentPage, setCurrentPage } = useContext(UserContext);
   const router = useRouter();
   const [newsFeed, setNewsFeed] = useState([]);
   const [ok, setOk] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
-
-  // useEffect(() => {
-  //   socket.on("receive-message", (newMessage) => {
-  //     setText(newMessage);
-  //   });
-  // }, []);
+  //const [currentPage, setCurrentPage] = useState(1);
+  const [totalPosts, setTotalPosts] = useState(0);
 
   useEffect(() => {
-    socket.on("new-post", (newPost) => {
-      setNewsFeed([newPost, ...posts]);
-    });
+    try {
+      axios.get("/total-posts").then(({ data }) => setTotalPosts(data));
+    } catch (err) {
+      console.log(err);
+    }
+  }, [newsFeed]);
 
+  useEffect(() => {
+    const handleUpdatedPost = (result) => {
+      console.log("SOC EXE");
+      setNewsFeed(result);
+    };
+
+    if (currentPage === 1) {
+      socket.on("updated-post", handleUpdatedPost);
+    }
+
+    return () => {
+      // Cleanup the socket event listener when the component unmounts or when currentPage changes.
+      socket.off("updated-post", handleUpdatedPost);
+    };
+  }, [currentPage]);
+
+  useEffect(() => {
     // Add scroll event listener when the component mounts
     window.addEventListener("scroll", handleScroll);
 
@@ -44,6 +62,42 @@ const Home = ({ posts }) => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  useEffect(() => {
+    fetchMoreData();
+  }, [currentPage]);
+
+  const fetchMoreData = async () => {
+    const { data } = await axios.get(`/posts/${currentPage}`);
+    setNewsFeed(data);
+  };
+
+  // // infinite scroll
+  // useEffect(() => {
+  //   window.addEventListener("scroll", handleInfiniteScroll);
+  //   console.log(currentPage);
+
+  //   fetchMoreData();
+  //   return () => {
+  //     window.removeEventListener("scroll", handleInfiniteScroll);
+  //   };
+  // }, [currentPage]);
+
+  // const fetchMoreData = async () => {
+  //   const { data } = await axios.get(`/posts/${currentPage}`);
+  //   console.log("PAGE", currentPage);
+  //   console.log(data);
+  //   setNewsFeed((prevData) => [...prevData, ...data]);
+  // };
+
+  // const handleInfiniteScroll = () => {
+  //   if (
+  //     window.innerHeight + document.documentElement.scrollTop ===
+  //     document.documentElement.offsetHeight
+  //   ) {
+  //     setCurrentPage((prev) => prev + 1);
+  //   }
+  // };
 
   useEffect(() => {
     if ((state && state.token) || (state && state.google_token)) {
@@ -58,7 +112,6 @@ const Home = ({ posts }) => {
   };
 
   const scrollToTop = () => {
-    // Scroll to the top of the page
     window.scrollTo({
       top: 0,
       behavior: "smooth",
@@ -77,7 +130,7 @@ const Home = ({ posts }) => {
   const collection = newsFeed.length > 0 ? newsFeed : posts;
 
   return (
-    <>
+    <div>
       <Head>
         <title>AY Social - A social network</title>
         <meta
@@ -105,23 +158,31 @@ const Home = ({ posts }) => {
         >
           Send message
         </button> */}
-        
+
         <button
-        className={`scroll-to-top-button ${isVisible ? "visible" : ""}`}
-        onClick={scrollToTop}
-      >
-        <ArrowUpOutlined />
-      </button>
+          className={`scroll-to-top-button ${isVisible ? "visible" : ""}`}
+          onClick={scrollToTop}
+        >
+          <ArrowUpOutlined />
+        </button>
 
         <div className="pt-3 custom-scrollbar col-md-6">
           {collection.map((post) => (
-            <div key={post._id} className="">
-              <Link
+            <div
+              onClick={() =>
+                router.push(
+                  !ok ? `/post/view/${post._id}` : `/post/${post._id}`
+                )
+              }
+              key={post._id}
+            >
+              <PostPublic post={post} />
+              {/* <Link
                 className="nav-link"
                 href={!ok ? `/post/view/${post._id}` : `/post/${post._id}`}
               >
                 <PostPublic post={post} />
-              </Link>
+              </Link> */}
             </div>
 
             // <div onClick={() => router.push(`/post/${post._id}`)} key={post._id} className="col-md-4">
@@ -130,7 +191,12 @@ const Home = ({ posts }) => {
             //     </div>
           ))}
         </div>
-        
+        <Pagination
+          page={currentPage}
+          setPage={setCurrentPage}
+          postCount={totalPosts}
+          scrollToTop={scrollToTop}
+        />
       </div>
       {/* <footer className="bd-footer py-2  bg-light">
         <div className="row">
@@ -148,13 +214,27 @@ const Home = ({ posts }) => {
           </div>
         </div>
       </footer> */}
-      
-    </>
+      <div className="row">
+        <div className="col">
+          <p className="text-center mt-3" style={{ fontSize: "10px" }}>
+            Created by{" "}
+            <Link
+              className="link-underline-light"
+              href="https://www.linkedin.com/in/andrii-yurov-b7138925a/"
+              target="blank"
+            >
+              Andrii Yurov
+            </Link>
+          </p>
+        </div>
+      </div>
+    </div>
   );
 };
 
 export async function getServerSideProps() {
-  const { data } = await axios.get("/posts");
+  const currentPage = 1;
+  const { data } = await axios.get(`/posts/${currentPage}`);
   // console.log(data);
   return {
     props: {
