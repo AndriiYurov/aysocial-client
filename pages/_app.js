@@ -12,11 +12,11 @@ import Footer from "../components/Footer";
 
 function MyApp({ Component, pageProps }) {
   return (
-    <GoogleOAuthProvider clientId={`${process.env.NEXT_PUBLIC_GOOGLE_ID}`}>
+    <GoogleOAuthProvider clientId={`${process.env.NEXT_PUBLIC_GOOGLE_ID}`} >
       <UserProvider>
-        <Head>
+        {/* <Head>
           <link rel="stylesheet" href="/css/style.css" />
-        </Head>
+        </Head> */}
         <Nav />
         <ToastContainer position="top-center" />
         <Component {...pageProps} />
