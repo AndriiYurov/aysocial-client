@@ -81,7 +81,7 @@ const ProfileUpdate = () => {
       setUploading(false);
       // console.log("uploaded image =>", data);
     } catch (err) {
-      console.log(err);
+      //console.log(err);
       setUploading(false);
     }
   };

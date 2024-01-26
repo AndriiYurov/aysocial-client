@@ -38,7 +38,7 @@ const ForgotPassword = () => {
         setLoading(false);
       }
     } catch (err) {
-      console.log(err);
+      //console.log(err);
       toast.error(err.response.data);
       setLoading(false);
     }

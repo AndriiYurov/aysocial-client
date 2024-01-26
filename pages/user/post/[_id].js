@@ -35,7 +35,7 @@ const EditPost = () => {
       setContent(data.content);
       setImage(data.image);
     } catch (err) {
-      console.log(err);
+      //console.log(err);
     }
   };
 
@@ -51,7 +51,7 @@ const EditPost = () => {
       setUploading(false);
       // console.log("uploaded image =>", data);
     } catch (err) {
-      console.log(err);
+      //console.log(err);
       setUploading(false);
     }
   };
@@ -71,7 +71,7 @@ const EditPost = () => {
         socket.emit("new-post", data);
       }
     } catch (err) {
-      console.log(err);
+      //console.log(err);
       toast.error(err.message);
     }
   };

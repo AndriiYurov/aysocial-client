@@ -33,13 +33,13 @@ const Home = ({ posts }) => {
     try {
       axios.get("/total-posts").then(({ data }) => setTotalPosts(data));
     } catch (err) {
-      console.log(err);
+      //console.log(err);
     }
   }, [newsFeed]);
 
   useEffect(() => {
     const handleUpdatedPost = (result) => {
-      console.log("SOC EXE");
+      
       setNewsFeed(result);
     };
 

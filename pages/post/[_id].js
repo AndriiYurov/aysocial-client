@@ -37,7 +37,7 @@ const PostComments = () => {
 
       setPost(data);
     } catch (err) {
-      console.log(err);
+      //console.log(err);
     }
   };
 
@@ -46,7 +46,7 @@ const PostComments = () => {
       const { data } = await axios.get(`/news-feed/${page}`);
       setPosts(data);
     } catch (err) {
-      console.log(err);
+      //console.log(err);
     }
   };
 
@@ -57,7 +57,7 @@ const PostComments = () => {
       // console.log("liked", data);
       fetchPost();
     } catch (err) {
-      console.log(err);
+      //console.log(err);
     }
   };
 
@@ -68,7 +68,7 @@ const PostComments = () => {
       // console.log("unliked", data);
       fetchPost();
     } catch (err) {
-      console.log(err);
+      //console.log(err);
     }
   };
 
@@ -91,7 +91,7 @@ const PostComments = () => {
       setVisible(false);
       fetchPost();
     } catch (err) {
-      console.log(err);
+      //console.log(err);
     }
   };
 
@@ -104,10 +104,10 @@ const PostComments = () => {
         postId,
         comment,
       });
-      console.log("comment removed", data);
+      //console.log("comment removed", data);
       fetchPost();
     } catch (err) {
-      console.log(err);
+      //console.log(err);
     }
   };
 

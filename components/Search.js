@@ -18,7 +18,7 @@ const Search = () => {
       //console.log("search  user =>", data);
       setResult(data);
     } catch (err) {
-      console.log(err);
+      //console.log(err);
     }
   };
 
@@ -39,7 +39,7 @@ const Search = () => {
       toast.success(`Following ${user.name}`);
       //rerender the posts
     } catch (err) {
-      console.log(err);
+      //console.log(err);
     }
   };
 
@@ -57,7 +57,7 @@ const Search = () => {
       setResult(filtered);
       toast.error(`Unfollowed ${user.name}`);
     } catch (err) {
-      console.log(err);
+      //console.log(err);
     }
   };
 
