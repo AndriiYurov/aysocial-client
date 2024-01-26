@@ -51,7 +51,7 @@ const Login = () => {
       window.localStorage.setItem("auth", JSON.stringify(data));
       // router.push("/user/dashboard");
     } catch (err) {
-      console.log(err);
+      //console.log(err);
     }
   };
 
@@ -78,7 +78,7 @@ const Login = () => {
         router.push("/user/dashboard");
       }
     } catch (err) {
-      console.log(err);
+      //console.log(err);
       toast.error(err.response.data);
       setLoading(false);
     }

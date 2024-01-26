@@ -25,7 +25,7 @@ const Admin = () => {
       const { data } = await axios.get(`/posts`);
       setPosts(data);
     } catch (err) {
-      console.log(err);
+      //console.log(err);
     }
   };
 
@@ -37,7 +37,7 @@ const Admin = () => {
       toast.error("Post deleted");
       newsFeed();
     } catch (err) {
-      console.log(err);
+      //console.log(err);
     }
   };
 

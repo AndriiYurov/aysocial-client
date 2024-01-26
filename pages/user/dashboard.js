@@ -51,7 +51,7 @@ const Home = () => {
     try {
       axios.get("/total-posts").then(({ data }) => setTotalPosts(data));
     } catch (err) {
-      console.log(err);
+      //console.log(err);
     }
     //console.log("posts", posts)
   }, [posts]);
@@ -61,7 +61,7 @@ const Home = () => {
       const { data } = await axios.get(`/news-feed/${page}`);
       setPosts(data);
     } catch (err) {
-      console.log(err);
+      //console.log(err);
     }
   };
 
@@ -70,7 +70,7 @@ const Home = () => {
       const { data } = await axios.get("/find-people");
       setPeople(data);
     } catch (err) {
-      console.log(err);
+      //console.log(err);
     }
   };
 
@@ -90,7 +90,7 @@ const Home = () => {
         socket.emit("new-post", data);
       }
     } catch (err) {
-      console.log(err);
+      //console.log(err);
       toast.error(err);
     }
   };
@@ -107,7 +107,7 @@ const Home = () => {
       setUploading(false);
       // console.log("uploaded image =>", data);
     } catch (err) {
-      console.log(err);
+      //console.log(err);
       setUploading(false);
     }
   };
@@ -121,7 +121,7 @@ const Home = () => {
       newsFeed();
       socket.emit("new-post", data);
     } catch (err) {
-      console.log(err);
+      //console.log(err);
     }
   };
 
@@ -143,7 +143,7 @@ const Home = () => {
       //rerender the posts
       newsFeed();
     } catch (err) {
-      console.log(err);
+      //console.log(err);
     }
   };
 
@@ -155,7 +155,7 @@ const Home = () => {
       newsFeed();
       socket.emit("new-post", data);
     } catch (err) {
-      console.log(err);
+      //console.log(err);
     }
   };
 
@@ -167,7 +167,7 @@ const Home = () => {
       newsFeed();
       socket.emit("new-post", data);
     } catch (err) {
-      console.log(err);
+      //console.log(err);
     }
   };
 
@@ -185,13 +185,13 @@ const Home = () => {
         postId: currentPost._id,
         comment,
       });
-      console.log("add coment", data);
+      //console.log("add coment", data);
       setComment("");
       setVisible(false);
       newsFeed();
       socket.emit("new-post", data);
     } catch (err) {
-      console.log(err);
+      //console.log(err);
     }
   };
 
@@ -204,11 +204,11 @@ const Home = () => {
         postId,
         comment,
       });
-      console.log("comment removed", data);
+      //console.log("comment removed", data);
       newsFeed();
       socket.emit("new-post", data);
     } catch (err) {
-      console.log(err);
+      //console.log(err);
     }
   };
 

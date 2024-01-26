@@ -26,7 +26,7 @@ const Following = () => {
     //   console.log("following =>", data);
       setPeople(data);
     } catch (err) {
-      console.log(err);
+      //console.log(err);
     }
   };
 
@@ -52,7 +52,7 @@ const Following = () => {
       setPeople(filtered);
       toast.success(`Unfollowed ${user.name}`);
     } catch (err) {
-      console.log(err);
+      //console.log(err);
     }
   };
 

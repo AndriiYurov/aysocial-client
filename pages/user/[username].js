@@ -28,7 +28,7 @@ const Username = () => {
       //   console.log("following =>", data);
       setUser(data);
     } catch (err) {
-      console.log(err);
+      //console.log(err);
     }
   };
 
@@ -58,7 +58,7 @@ const Username = () => {
       //rerender the posts
       newsFeed();
     } catch (err) {
-      console.log(err);
+      //console.log(err);
     }
   };
 
@@ -76,7 +76,7 @@ const Username = () => {
       // setPeople(filtered);
       toast.success(`Unfollowed ${user.name}`);
     } catch (err) {
-      console.log(err);
+      //console.log(err);
     }
   };
 
