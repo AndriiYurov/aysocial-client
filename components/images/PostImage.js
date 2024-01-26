@@ -6,7 +6,8 @@ const PostImage = ({ url }) => {
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center center",
         backgroundSize: "contain",
-        height: "400px",
+        height: "300px",
+        
       }}
     ></div>
   );
