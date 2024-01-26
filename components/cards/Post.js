@@ -35,7 +35,7 @@ const Post = ({
         <div key={post._id} className="card mb-5">
           <div className="card-header">
             {/* <Avatar size={40}>{post.postedBy.name[0]}</Avatar> */}
-            <Avatar size={40} src={imageSource(post.postedBy)} />
+            <Avatar size={40} src={imageSource(post.postedBy)} alt="user avatar" />
             <span className="pt-2 ml-3" style={{ marginLeft: "0.5rem" }}>
               {post.postedBy.name}
             </span>
@@ -94,7 +94,7 @@ const Post = ({
           {/* 2 comments */}
           {post.comments && post.comments.length > 0 && (
             <ol
-              className="list-group custom-scrollbar"
+              className="list-group custom-scrollbar m-2"
               style={{ maxHeight: "125px", overflow: "scroll" }}
             >
               {post.comments.slice(0, commentsCount).map((c) => (
@@ -108,6 +108,7 @@ const Post = ({
                         size={20}
                         className="m-1"
                         src={imageSource(c.postedBy)}
+                        alt="user avatar"
                       />
                       {c.postedBy.name}
                     </div>
