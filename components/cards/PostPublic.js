@@ -31,8 +31,8 @@ const PostPublic = ({ post, commentsCount = 3 }) => {
           </div>
           <div className="card-body">{renderHTML(post.content)}</div>
           <div className="card-footer">
-            {/* {post.image && <PostImage url={post.image.url} />} */}
-            {post.image && (
+            {post.image && <PostImage url={post.image.url} />}
+            {/* {post.image && (
               <MDBRipple
                 className="d-flex justify-content-center"
                 rippleTag="a"
@@ -43,7 +43,7 @@ const PostPublic = ({ post, commentsCount = 3 }) => {
                   alt="post image"
                 />
               </MDBRipple>
-            )}
+            )} */}
             <div className="d-flex  justify-content-between p-2">
               <div className="d-flex align-items-center">
                 {state &&
