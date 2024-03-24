@@ -27,6 +27,7 @@ jobs:
       - run: |
           touch .env.local 
           echo "${{ secrets.STAGE_ENV_FILE }}" > .env.local
+      - run: npm run test --force    
       - run: npm run build --force
 
       - name: rsync deployments

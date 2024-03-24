@@ -39,7 +39,6 @@ const Home = ({ posts }) => {
 
   useEffect(() => {
     const handleUpdatedPost = (result) => {
-      
       setNewsFeed(result);
     };
 
@@ -233,14 +232,22 @@ const Home = ({ posts }) => {
 };
 
 export async function getServerSideProps() {
-  const currentPage = 1;
-  const { data } = await axios.get(`/posts/${currentPage}`);
-  // console.log(data);
-  return {
-    props: {
-      posts: data,
-    },
-  };
+  try {
+    const currentPage = 1;
+    const { data } = await axios.get(`/posts/${currentPage}`);
+    // console.log(data);
+    return {
+      props: {
+        posts: data,
+      },
+    };
+  } catch (err) {
+    return {
+      props: {
+        posts: [],
+      },
+    };
+  }
 }
 
 export default Home;

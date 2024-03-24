@@ -1,18 +1,14 @@
 ::-webkit-scrollbar {
   width: 8px;
-  
-  border-radius: 6px
-  
+
+  border-radius: 6px;
 }
 ::-webkit-scrollbar-thumb {
   background-color: #c1bebe; /* color of the thumb */
   border-radius: 6px; /* roundness of the thumb */
-  
-  
 }
 ::-webkit-scrollbar-track {
   background-color: transparent; /* color of the track */
-  
 }
 
 body {
@@ -20,10 +16,7 @@ body {
   overflow-y: scroll;
   scrollbar-width: thin; /* For Firefox */
   scrollbar-color: #c1bebe transparent; /* For Firefox */
-
 }
-
-
 
 .sc {
   height: 100vh;
@@ -31,11 +24,11 @@ body {
 }
 
 .bg-color {
-  background-color: rgba(122, 66, 196, 0.6)!important;
+  background-color: rgba(122, 66, 196, 0.6) !important;
 }
 .bg-text {
-  text-shadow: 2px 2px 2px #000000!important;
-  color: rgb(141, 134, 143)!important;
+  text-shadow: 2px 2px 2px #000000 !important;
+  color: rgb(141, 134, 143) !important;
 }
 
 .bg-default-image {
@@ -46,21 +39,23 @@ body {
 }
 
 .logo {
-position: absolute;
+  position: absolute;
 }
 
 .active {
-  background-color: rgba(var(--bs-primary-rgb),var(--bs-bg-opacity))!important;
+  background-color: rgba(
+    var(--bs-primary-rgb),
+    var(--bs-bg-opacity)
+  ) !important;
   border-radius: 5px;
-  
 }
 
 .hover:hover {
-  color: black!important;
+  color: black !important;
 }
 
 .textColor {
-  color: red!important;
+  color: red !important;
 }
 
 .pointer {
@@ -72,7 +67,6 @@ position: absolute;
   position: absolute;
   bottom: 0;
 }
-
 
 .scroll-to-top-button {
   position: fixed;

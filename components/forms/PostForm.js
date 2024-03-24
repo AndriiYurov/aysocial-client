@@ -1,9 +1,8 @@
 import { Avatar } from "antd";
-import dynamic from "next/dynamic";
-const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
-// import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
+// import dynamic from "next/dynamic";
+// const Editor = dynamic(() => import("./Editor"), { ssr: false });
 import { CameraOutlined, LoadingOutlined } from "@ant-design/icons";
+import { Editor } from "primereact/editor";
 
 const PostForm = ({
   content,
@@ -13,17 +12,41 @@ const PostForm = ({
   uploading,
   image,
 }) => {
+  const modules = {
+    toolbar: [
+      ["bold", "italic", "underline", "strike"], // toggled buttons
+      // ["blockquote", "code-block"],
+      ["link"],
+
+      // [{ header: 1 }, { header: 2 }], // custom button values
+      // [{ list: "ordered" }, { list: "bullet" }, { list: "check" }],
+      // [{ script: "sub" }, { script: "super" }], // superscript/subscript
+      // [{ indent: "-1" }, { indent: "+1" }], // outdent/indent
+      // [{ direction: "rtl" }], // text direction
+
+      // [{ size: ["small", false, "large", "huge"] }], // custom dropdown
+      [{ header: [1, 2, 3, 4, 5, 6, false] }],
+
+      [{ color: [] }, { background: [] }], // dropdown with defaults from theme
+      // [{ font: [] }],
+      [{ align: [] }],
+
+      ["clean"],
+    ],
+  };
+
   return (
     <div className="card">
       <div className="card-body pb-3">
         <form className="form-group">
-          <ReactQuill
-            theme="snow"
+          <Editor
             value={content}
-            onChange={(e) => setContent(e)}
-            className="form-control"
-            placeholder="Write something"
+            onTextChange={(e) => setContent(e.htmlValue)}
+            style={{ height: "200px" }}
+            modules={modules}
+            headerTemplate
           />
+          {/* <Editor value={content} onChange={(e) => setContent(e)} /> */}
         </form>
       </div>
       <div className="card-footer d-flex justify-content-between text-muted">
@@ -38,7 +61,12 @@ const PostForm = ({
           ) : (
             <CameraOutlined className="mt-2" />
           )}
-          <input onChange={handleImage} type="file" accept="capture=camera,image/*" hidden />
+          <input
+            onChange={handleImage}
+            type="file"
+            accept="capture=camera,image/*"
+            hidden
+          />
         </label>
       </div>
     </div>
